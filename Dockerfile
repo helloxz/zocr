@@ -6,6 +6,9 @@ WORKDIR /opt/zocr
 # 安装系统依赖
 RUN apt-get update && apt-get install -y --no-install-recommends \
     procps \
+    libxcb1 \
+    libgl1 \
+    libglib2.0-0 \
     && rm -rf /var/lib/apt/lists/*
 
 # 创建并激活虚拟环境，然后安装依赖
