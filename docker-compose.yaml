@@ -1,0 +1,12 @@
+services:
+  zocr:
+    container_name: zocr
+    build: .
+    ports:
+      - "6080:6080"
+    environment:
+      - TOKEN=your_token_here
+      - WORKERS=1
+      - OCR_LANG=ch
+      - MAX_FILE_SIZE=10485760
+    restart: unless-stopped
