@@ -3,3 +3,4 @@ uvicorn
 python-multipart
 rapidocr-onnxruntime
 opencv-python-headless
+httpx

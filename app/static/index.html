@@ -288,7 +288,7 @@
                 const headers = {};
                 if (token) headers['Authorization'] = `Bearer ${token}`;
 
-                const resp = await fetch('/api/ocr', { method: 'POST', headers, body: formData });
+                const resp = await fetch('/api/ocr/upload', { method: 'POST', headers, body: formData });
                 const data = await resp.json();
 
                 if (data.code === 200) {

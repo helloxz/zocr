@@ -79,10 +79,14 @@ GET /api/health
 ## 调用示例
 
 ```bash
-# 使用curl调用
-curl -X POST http://localhost:6080/api/ocr \
+# 使用curl调用（上传文件）
+curl -X POST http://localhost:6080/api/ocr/upload \
   -H "Authorization: Bearer your_token" \
   -F "file=@test.jpg"
+
+# 使用curl调用（通过URL）
+curl "http://localhost:6080/api/ocr/fetch?url=https://example.com/image.jpg" \
+  -H "Authorization: Bearer your_token"
 ```
 
 ## 端口

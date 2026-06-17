@@ -7,7 +7,7 @@
 ## 关键入口
 
 - `app/main.py` - FastAPI应用入口
-- `app/routers.py` - 路由定义（`/api/ocr`, `/api/health`）
+- `app/routers.py` - 路由定义（`/api/ocr/upload`, `/api/ocr/fetch`, `/api/health`）
 - `app/api/ocr.py` - OCR核心逻辑（延迟初始化单例）
 - `app/middleware/auth.py` - Bearer Token认证（TOKEN为空则跳过）
 - `app/config.py` - 环境变量配置
