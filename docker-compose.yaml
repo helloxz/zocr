@@ -3,7 +3,7 @@ services:
     container_name: zocr
     build: .
     ports:
-      - "6080:6080"
+      - "5080:5080"
     environment:
       - TOKEN=your_token_here
       - WORKERS=1

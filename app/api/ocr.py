@@ -37,6 +37,8 @@ def get_ocr_instance() -> RapidOCR:
             det_model_path=det_model_path,
             rec_model_path=rec_model_path,
             rec_keys_path=rec_keys_path,
+            intra_op_num_threads=1,
+            inter_op_num_threads=1,
         )
         logger.info("RapidOCR initialized successfully")
     return _ocr_instance

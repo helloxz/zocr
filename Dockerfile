@@ -19,7 +19,7 @@ COPY app ./app
 COPY run.sh .
 
 # 暴露端口
-EXPOSE 6080
+EXPOSE 5080
 
 # 启动命令
 CMD ["bash", "run.sh"]
