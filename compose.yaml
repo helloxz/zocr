@@ -1,5 +1,6 @@
 services:
   zocr:
+    image: helloz/zocr
     container_name: zocr
     ports:
       - "5080:5080"

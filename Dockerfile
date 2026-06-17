@@ -8,15 +8,14 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     procps \
     && rm -rf /var/lib/apt/lists/*
 
-# 复制依赖文件
+# 创建并激活虚拟环境，然后安装依赖
 COPY requirements.txt .
+RUN python -m venv myenv && \
+    . myenv/bin/activate && \
+    pip install --no-cache-dir -r requirements.txt
 
-# 安装Python依赖
-RUN pip install --no-cache-dir -r requirements.txt
-
-# 复制应用代码
-COPY app ./app
-COPY run.sh .
+# 复制所有项目文件
+COPY . .
 
 # 暴露端口
 EXPOSE 5080

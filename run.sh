@@ -1,5 +1,10 @@
 #!/bin/sh
 
+# 激活虚拟环境
+if [ -f "myenv/bin/activate" ]; then
+    source myenv/bin/activate
+fi
+
 # 检查并导入.env文件
 if [ -f ".env" ]; then
     echo "Loading .env file..."
