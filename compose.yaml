@@ -7,4 +7,5 @@ services:
     environment:
       - TOKEN=your_token_here
       - WORKERS=1
+      - OCR_MODEL_VERSION=tiny
     restart: always
