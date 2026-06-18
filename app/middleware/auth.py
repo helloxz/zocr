@@ -15,7 +15,7 @@ async def auth(request: Request, call_next: Callable):
 
     # 从环境变量中获取TOKEN
     import os
-    os_token = os.getenv("TOKEN", "")
+    os_token = os.getenv("ZOCR_TOKEN", "")
 
     # 如果没获取到，则不进行鉴权，直接放行
     if not os_token:

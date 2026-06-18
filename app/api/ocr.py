@@ -126,7 +126,7 @@ class OcrHandler:
         return JSONResponse(
             status_code=200,
             content=show_json(200, "ok", {
-                "version": config.get("version", "1.0.0"),
+                "version": config.get("version", "0.1.0"),
                 "status": "running"
             })
         )

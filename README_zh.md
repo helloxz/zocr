@@ -28,14 +28,14 @@ services:
     ports:
       - "5080:5080"
     environment:
-      - TOKEN=your_token_here
+      - ZOCR_TOKEN=your_token_here
     restart: always
 ```
 
 可选环境变量：
-- `WORKERS`: uvicorn工作进程数，默认1
-- `OCR_MODEL_VERSION`: OCR模型版本（tiny/small），默认small
-- `MAX_FILE_SIZE`: 最大文件大小(bytes)，默认10485760
+- `ZOCR_WORKERS`: uvicorn工作进程数，默认1
+- `ZOCR_MODEL_VERSION`: OCR模型版本（tiny/small），默认small
+- `ZOCR_MAX_FILE_SIZE`: 最大文件大小(bytes)，默认10485760
 
 启动服务：
 
@@ -58,14 +58,14 @@ bash run.sh dev
 
 ## 配置说明
 
-通过环境变量配置，TOKEN为空则跳过认证：
+通过环境变量配置，ZOCR_TOKEN为空则跳过认证：
 
 | 变量名 | 说明 | 默认值 |
 |--------|------|--------|
-| TOKEN | 认证密钥 | 空（不认证） |
-| WORKERS | uvicorn工作进程数 | 1 |
-| OCR_MODEL_VERSION | OCR模型版本（tiny/small） | small |
-| MAX_FILE_SIZE | 最大文件大小(bytes) | 10485760 (10MB) |
+| ZOCR_TOKEN | 认证密钥 | 空（不认证） |
+| ZOCR_WORKERS | uvicorn工作进程数 | 1 |
+| ZOCR_MODEL_VERSION | OCR模型版本（tiny/small） | small |
+| ZOCR_MAX_FILE_SIZE | 最大文件大小(bytes) | 10485760 (10MB) |
 
 ## API接口
 

@@ -28,14 +28,14 @@ services:
     ports:
       - "5080:5080"
     environment:
-      - TOKEN=your_token_here
+      - ZOCR_TOKEN=your_token_here
     restart: always
 ```
 
 Optional environment variables:
-- `WORKERS`: Number of uvicorn worker processes, default 1
-- `OCR_MODEL_VERSION`: OCR model version (tiny/small), default small
-- `MAX_FILE_SIZE`: Maximum file size (bytes), default 10485760
+- `ZOCR_WORKERS`: Number of uvicorn worker processes, default 1
+- `ZOCR_MODEL_VERSION`: OCR model version (tiny/small), default small
+- `ZOCR_MAX_FILE_SIZE`: Maximum file size (bytes), default 10485760
 
 Start the service:
 
@@ -58,14 +58,14 @@ bash run.sh dev
 
 ## Configuration
 
-Configure via environment variables. If TOKEN is empty, authentication is skipped:
+Configure via environment variables. If ZOCR_TOKEN is empty, authentication is skipped:
 
 | Variable | Description | Default |
 |----------|-------------|---------|
-| TOKEN | Authentication key | Empty (no auth) |
-| WORKERS | Number of uvicorn worker processes | 1 |
-| OCR_MODEL_VERSION | OCR model version (tiny/small) | small |
-| MAX_FILE_SIZE | Maximum file size (bytes) | 10485760 (10MB) |
+| ZOCR_TOKEN | Authentication key | Empty (no auth) |
+| ZOCR_WORKERS | Number of uvicorn worker processes | 1 |
+| ZOCR_MODEL_VERSION | OCR model version (tiny/small) | small |
+| ZOCR_MAX_FILE_SIZE | Maximum file size (bytes) | 10485760 (10MB) |
 
 ## API Endpoints
 

@@ -17,8 +17,8 @@ ARG1=$1
 
 # 启动主进程
 runMain(){
-    # 获取环境变量WORKERS
-    WORKERS=${WORKERS}
+    # 获取环境变量ZOCR_WORKERS
+    WORKERS=${ZOCR_WORKERS}
     # 判断变量是否存在
     if [ -z "$WORKERS" ]; then
         WORKERS=1

@@ -5,7 +5,7 @@ services:
     ports:
       - "5080:5080"
     environment:
-      - TOKEN=your_token_here
-      - WORKERS=1
-      - OCR_MODEL_VERSION=tiny
+      - ZOCR_TOKEN=your_token_here
+      - ZOCR_WORKERS=1
+      - ZOCR_MODEL_VERSION=tiny
     restart: always
