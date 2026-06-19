@@ -14,8 +14,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # 复制所有项目文件
 COPY . .
 # 创建并激活虚拟环境，然后安装依赖
-RUN rm -rf app/models/ppocrv6_medium && \
-    python -m venv myenv && \
+RUN python -m venv myenv && \
     . myenv/bin/activate && \
     pip install --no-cache-dir -r requirements.txt
 

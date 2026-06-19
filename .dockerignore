@@ -3,3 +3,4 @@ myenv
 .env
 *.pyc
 __pycache__
+app/models/ppocrv6_medium
