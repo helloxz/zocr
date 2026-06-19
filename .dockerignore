@@ -4,3 +4,4 @@ myenv
 *.pyc
 __pycache__
 app/models/ppocrv6_medium
+*.onnx
