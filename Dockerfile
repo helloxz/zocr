@@ -13,6 +13,13 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 # 复制所有项目文件
 COPY . .
+
+# 压缩ONNX模型（减小镜像体积）
+RUN apt-get update && apt-get install -y --no-install-recommends gzip && \
+    find app/models -name "*.onnx" -exec gzip -k {} \; && \
+    find app/models -name "*.onnx" -not -name "*.gz" -delete && \
+    apt-get purge -y gzip && apt-get autoremove -y
+
 # 创建并激活虚拟环境，然后安装依赖
 RUN python -m venv myenv && \
     . myenv/bin/activate && \

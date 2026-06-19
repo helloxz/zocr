@@ -1,8 +1,13 @@
+import gzip
 import io
 import logging
+import os
+import shutil
+from pathlib import Path
 from typing import Optional
 
 import numpy as np
+from filelock import FileLock
 from PIL import Image
 from fastapi import UploadFile, File
 from fastapi.responses import JSONResponse
@@ -17,6 +22,40 @@ logger = logging.getLogger(__name__)
 _ocr_instance: Optional[RapidOCR] = None
 
 
+def ensure_model_decompressed(model_path: str) -> str:
+    """
+    确保模型文件已解压
+    - 如果 .onnx 存在，直接返回路径
+    - 如果只有 .onnx.gz，解压后返回路径
+    - 使用文件锁防止多 worker 争抢
+    """
+    path = Path(model_path)
+
+    # 已解压，直接返回
+    if path.exists():
+        return model_path
+
+    # 检查 .gz 文件
+    gz_path = Path(model_path + ".gz")
+    if not gz_path.exists():
+        raise FileNotFoundError(f"Model not found: {model_path} or {gz_path}")
+
+    # 使用文件锁，防止多 worker 同时解压
+    lock_path = model_path + ".lock"
+    with FileLock(lock_path):
+        # 锁内再次检查，避免重复解压
+        if not path.exists():
+            # 原子写入：先写临时文件，再 rename
+            tmp_path = model_path + ".tmp"
+            with gzip.open(gz_path, 'rb') as f_in:
+                with open(tmp_path, 'wb') as f_out:
+                    shutil.copyfileobj(f_in, f_out)
+            os.rename(tmp_path, model_path)
+            logger.info(f"Decompressed: {gz_path.name} -> {path.name}")
+
+    return model_path
+
+
 def get_ocr_instance() -> RapidOCR:
     """获取OCR单例实例"""
     global _ocr_instance
@@ -28,6 +67,10 @@ def get_ocr_instance() -> RapidOCR:
         det_model_path = str(model_dir / f"ppocrv6_{model_version}" / f"ppocrv6_{model_version}_det.onnx")
         rec_model_path = str(model_dir / f"ppocrv6_{model_version}" / f"ppocrv6_{model_version}_rec.onnx")
         rec_keys_path = str(model_dir / f"ppocrv6_{model_version}_keys.txt")
+
+        # 确保模型已解压（支持 .gz 压缩格式）
+        det_model_path = ensure_model_decompressed(det_model_path)
+        rec_model_path = ensure_model_decompressed(rec_model_path)
 
         logger.info(f"Initializing RapidOCR with model version: {model_version}")
         logger.info(f"Det model: {det_model_path}")
