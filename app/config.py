@@ -3,7 +3,7 @@ from pathlib import Path
 from typing import Any
 
 # 版本号
-VERSION = "0.2.0"
+VERSION = "0.3.0"
 
 # 支持的图片格式
 ALLOWED_EXTENSIONS = {"jpg", "jpeg", "png", "bmp", "webp"}
